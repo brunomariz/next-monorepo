@@ -9,5 +9,8 @@
       "packages/*",
       "apps/*"
     ]
+  },
+  "scripts": {
+    "dev": "npm --workspaces --if-present run dev"
   }
 }

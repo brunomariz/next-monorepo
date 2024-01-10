@@ -2,7 +2,7 @@
   "name": "nextapp-1",
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev &",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

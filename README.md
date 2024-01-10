@@ -191,3 +191,24 @@ export default function Home() {
   );
 }
 ```
+
+- Add script to run all projects at once at root package.json
+
+```
+  ...
+  "scripts": {
+    "dev": "npm --workspaces --if-present run dev"
+  }
+  ...
+```
+
+- Add symbol to run dev scripts in background on apps
+
+```
+"scripts": {
+    "dev": "next dev &",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+```
