@@ -212,3 +212,7 @@ export default function Home() {
     "lint": "next lint"
   },
 ```
+
+- Run all at once
+
+yarn dev
