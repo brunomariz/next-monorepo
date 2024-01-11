@@ -221,7 +221,9 @@ export default function Home() {
   ...
 ```
 
-- Add symbol to run dev scripts in background on apps
+- Add & to dev command to run dev scripts in background on apps
+
+apps/nextapp-*/package.json
 
 ```json
 "scripts": {
