@@ -216,12 +216,12 @@ export default function Home() {
 ```json
   ...
   "scripts": {
-    "dev": "npm --workspaces --if-present run dev"
+    "dev": "npm --workspaces --if-present run dev &"
   }
   ...
 ```
 
-- Add symbol to run dev scripts in background on apps
+<!-- - Add symbol to run dev scripts in background on apps
 
 ```json
 "scripts": {
@@ -230,9 +230,9 @@ export default function Home() {
     "start": "next start",
     "lint": "next lint"
   },
-```
+``` -->
 
-- Run all at once
+- Run all dev servers at once
 
 ```shell
 yarn dev

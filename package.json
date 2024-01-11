@@ -11,6 +11,6 @@
     ]
   },
   "scripts": {
-    "dev": "npm --workspaces --if-present run dev"
+    "dev": "npm --workspaces --if-present run dev &"
   }
 }
