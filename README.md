@@ -336,3 +336,119 @@ export default function Home() {
   );
 }
 ```
+
+### Share Tailwind configuration
+
+- Create tailwind-config module
+
+```shell
+cd packages
+mkdir tailwind-config
+yarn init -y
+touch index.ts
+touch tailwind-theme.ts
+```
+
+package.json:
+
+```json
+{
+  "name": "@next-monorepo/tailwind-config",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT"
+}
+```
+
+index.ts:
+
+```ts
+export { theme } from "./tailwind-theme";
+```
+
+tailwind-theme.ts:
+
+```ts
+export const theme = {
+  extend: {
+    colors: { myGreen: "#b3e6c3" },
+  },
+};
+```
+
+- Install module on project
+
+```shell
+yarn install
+```
+
+- Update tailwind configuration in apps and use shared theme
+
+nextapp-1/app/page.tsx:
+
+```tsx
+import { SharedUi, Button } from "@next-monorepo/ui";
+import Image from "next/image";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-myGreen">
+      <SharedUi>Hello! I am app 1</SharedUi>
+      <Button>App 1 Button!</Button>
+    </main>
+  );
+}
+```
+
+nextapp-1/package.json:
+
+```json
+  ...
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.0.4",
+    "@next-monorepo/ui": "*",
+    "@next-monorepo/tailwind-config": "*"
+  },
+  ...
+```
+
+nextapp-1/tailwind.config.ts:
+
+```ts
+import type { Config } from "tailwindcss";
+import { theme } from "@next-monorepo/tailwind-config";
+
+const config: Config = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: { ...theme },
+  plugins: [],
+};
+export default config;
+```
+
+nextapp-2/tailwind.config.ts and nextapp-2/package.json: same changes as in nextapp-1
+
+nextapp-2/app/page.tsx:
+
+```tsx
+import { SharedUi } from "@next-monorepo/ui";
+import Image from "next/image";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <SharedUi>
+        <p className="bg-myGreen p-5 rounded-md">
+          Hello! I am app 2 and now I use the shared theme!
+        </p>
+      </SharedUi>
+    </main>
+  );
+}
+```
