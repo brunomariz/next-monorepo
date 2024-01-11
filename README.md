@@ -211,13 +211,21 @@ export default function Home() {
 }
 ```
 
-- Add script to run all projects at once at root package.json
+- Add scripts to run all projects at once at root package.json
+
+Install npm-run-all
+
+```shell
+yarn add --dev -W npm-run-all
+```
 
 ```json
   ...
   "scripts": {
-    "dev": "npm --workspaces --if-present run dev &"
-  }
+    "dev-app-1": "yarn workspace nextapp-1 dev",
+    "dev-app-2": "yarn workspace nextapp-2 dev",
+    "dev-all": "npm-run-all --parallel dev-app-1 dev-app-2"
+  },
   ...
 ```
 
@@ -238,7 +246,7 @@ apps/nextapp-*/package.json
 - Run all dev servers at once
 
 ```shell
-yarn dev
+yarn dev-all
 ```
 
 - Add more files to the shared utils
