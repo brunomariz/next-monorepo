@@ -240,3 +240,91 @@ apps/nextapp-*/package.json
 ```shell
 yarn dev
 ```
+
+- Add more files to the shared utils
+
+```shell
+cd packages/ui
+mkdir sharedUiComponents
+cd sharedUiComponents
+touch button.tsx
+```
+
+packages/ui/sharedUiComponents/button.tsx:
+
+```ts
+import React, { ReactNode } from "react";
+
+type Props = {
+  children: ReactNode;
+};
+
+function SharedButton({ children }: Props) {
+  return (
+    <button
+      className="p-5 rounded-lg bg-gray-100"
+      onClick={() => alert("This is a shared component!")}
+    >
+      {children}
+    </button>
+  );
+}
+
+export default SharedButton;
+```
+
+- Add export for button on sharedUi.tsx
+
+```ts
+import Button from "./sharedUiComponents/button";
+import React, { ReactNode } from "react";
+
+type Props = {
+  children: ReactNode;
+};
+
+function SharedUi({ children }: Props) {
+  return (
+    <div className="flex flex-col">
+      <div>Shared UI component!</div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+export { Button };
+export { SharedUi };
+```
+
+- Update import on apps and include button import
+
+apps/nextapp-1/app/page.tsx:
+
+```ts
+import { SharedUi, Button } from "@next-monorepo/ui";
+import Image from "next/image";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <SharedUi>Hello! I am app 1</SharedUi>
+      <Button>App 1 Button!</Button>
+    </main>
+  );
+}
+```
+
+apps/nextapp-2/app/page.tsx:
+
+```ts
+import { SharedUi } from "@next-monorepo/ui";
+import Image from "next/image";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <SharedUi>Hello! I am app 2</SharedUi>
+    </main>
+  );
+}
+```

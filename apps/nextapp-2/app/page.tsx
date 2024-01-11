@@ -1,4 +1,4 @@
-import SharedUi from "@next-monorepo/ui";
+import { SharedUi } from "@next-monorepo/ui";
 import Image from "next/image";
 
 export default function Home() {

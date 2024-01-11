@@ -1,3 +1,4 @@
+import Button from "./sharedUiComponents/button";
 import React, { ReactNode } from "react";
 
 type Props = {
@@ -13,4 +14,5 @@ function SharedUi({ children }: Props) {
   );
 }
 
-export default SharedUi;
+export { Button };
+export { SharedUi };
