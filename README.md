@@ -31,6 +31,8 @@ yarn init -y
 }
 ```
 
+### Create the Next.js apps
+
 - Create the apps folder
 
 ```shell
@@ -92,13 +94,15 @@ cd apps/nextapp-2
 yarn dev
 ```
 
+### Create shared UI components
+
 - Create packages folder
 
 ```shell
 mkdir packages
 ```
 
-- Create shared UI
+- Create shared UI module
 
 ```shell
 cd packages
@@ -369,7 +373,9 @@ export { theme } from "./tailwind-theme";
 tailwind-theme.ts:
 
 ```ts
-export const theme = {
+import type { Config } from "tailwindcss";
+
+export const theme: Config["theme"] = {
   extend: {
     colors: { myGreen: "#b3e6c3" },
   },
@@ -425,6 +431,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "../../packages/ui/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: { ...theme },
   plugins: [],
@@ -451,4 +458,58 @@ export default function Home() {
     </main>
   );
 }
+```
+
+- Update shared UI module's tailwind config to use the shared theme aswell
+
+packages/ui/package.json:
+
+```json
+  ...
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.0.4",
+    "@next-monorepo/tailwind-config": "*"
+  },
+  ...
+```
+
+packages/ui/tailwind.config.ts:
+
+```js
+import type { Config } from "tailwindcss";
+import { theme } from "@next-monorepo/tailwind-config";
+
+const config: Config = {
+  content: [],
+  theme: { ...theme },
+  plugins: [],
+};
+export default config;
+```
+
+packages/ui/sharedUi.tsx:
+
+```tsx
+import Button from "./sharedUiComponents/button";
+import React, { ReactNode } from "react";
+
+type Props = {
+  children: ReactNode;
+};
+
+function SharedUi({ children }: Props) {
+  return (
+    <div className="flex flex-col">
+      <div className="text-3xl text-myGreen bg-gray-100 p-2 rounded-md">
+        Shared UI component!
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+export { Button };
+export { SharedUi };
 ```

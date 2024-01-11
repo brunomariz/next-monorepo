@@ -8,7 +8,9 @@ type Props = {
 function SharedUi({ children }: Props) {
   return (
     <div className="flex flex-col">
-      <div>Shared UI component!</div>
+      <div className="text-3xl text-myGreen bg-gray-100 p-2 rounded-md">
+        Shared UI component!
+      </div>
       <div>{children}</div>
     </div>
   );
