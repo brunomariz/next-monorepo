@@ -7,7 +7,7 @@ This repo shows how to create a monorepo with yarn workspaces to use with Next.j
 - Create folder
 
 ```shell
-mkdir my-monorepo
+mkdir next-monorepo
 ```
 
 - Initialize node project with yarn
