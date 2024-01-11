@@ -7,7 +7,7 @@ This repo shows how to create a monorepo with yarn workspaces to use with Next.j
 - Create folder
 
 ```shell
-mkdir my-monorepo
+mkdir next-monorepo
 ```
 
 - Initialize node project with yarn
@@ -222,6 +222,9 @@ export default function Home() {
 ```
 
 <!-- - Add symbol to run dev scripts in background on apps
+- Add & to dev command to run dev scripts in background on apps
+
+apps/nextapp-*/package.json
 
 ```json
 "scripts": {
